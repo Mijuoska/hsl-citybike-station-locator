@@ -1,0 +1,23 @@
+li {
+    list-style: none;
+    width: 30%;
+    padding: 6px;
+    border-bottom: 1px solid #ddd;
+    background-color: white;
+}
+
+li:hover {
+    background-color: #eeeaea;
+    transition: 0.3s
+}
+
+.locate {
+    margin-left: 5px;
+}
+
+#location-display {
+    border: 1px groove grey;
+    width: 40%;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
