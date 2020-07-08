@@ -21,10 +21,7 @@
         distances.push(distance)
              });
         
-        let locateButtons = document.querySelectorAll('.locate')
-        for (let button of locateButtons) {
-          createEventListener(button, myStreetName, myStreetNumber, myCity)
-        }
+       
       let nearestStations = calculateNearestStations(distances)
       let stationName = nearestStations[0].station.attributes["Nimi"]
       let stationAddress = nearestStations[0].station.attributes["Osoite"]
@@ -41,6 +38,10 @@
         let station = nearestStations[i].station
         createStationList(station)
       }
+       let locateButtons = document.querySelectorAll('.locate')
+       for (let button of locateButtons) {
+         createEventListener(button, myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
+       }
       
        })
  

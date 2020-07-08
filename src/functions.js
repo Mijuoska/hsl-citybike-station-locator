@@ -85,7 +85,7 @@ const createStationList = (station) => {
         lng: `${station.attributes["x"]}`
     })
     button.classList.add('locate')
-    button.innerText = "Locate"
+    button.innerText = "Show directions"
     li.innerHTML = `${station.attributes["Nimi"]} - ${station.attributes["Osoite"]}`
     li.id = `${station.attributes["Osoite"]}, ${station.attributes["Kaupunki"]}`
     let ul = document.getElementById('station-list')
@@ -95,13 +95,13 @@ const createStationList = (station) => {
 
 
 
-const createEventListener = (button,myStreetName, myStreetNumber, myCity) => {    
+const createEventListener = (button, myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity) => {
     button.addEventListener('click', (e) => {
         let id = e.path[1].id
         let stationStreet = id.split(' ')[0]
         let stationStreetNum = id.split(' ')[1].replace(/,/, '')
         let stationCity = id.split(',')[1].trim()
-        openMap(myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
+        embedDirections(myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
         });
 
     }
