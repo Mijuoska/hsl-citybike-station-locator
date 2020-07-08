@@ -15,8 +15,6 @@ const getLocation = (options, callback) => {
     }
 }
 
-
-
 const showError = (error) => {
     switch (error.code) {
         case error.PERMISSION_DENIED:
@@ -63,7 +61,7 @@ const calculateDistances = (lat1, lon1, lat2, lon2, station, unit) => {
      return {station: station, distance: dist};
 }
 
-const calculateNearestStation = (distances) => {
+const calculateNearestStations = (distances) => {
     let sorted = distances.sort((a, b) => {
         if (a.distance > b.distance) {
             return 1
@@ -73,7 +71,7 @@ const calculateNearestStation = (distances) => {
             return 0
         }
     })
-        return sorted[0]
+        return sorted
 
 }
 
@@ -109,7 +107,9 @@ const createEventListener = (button,myStreetName, myStreetNumber, myCity) => {
     }
 
 
-const openMap = (streetName1, streetNum1, city1, streetName2, streetNum2, city2) => {
-    let url = `https://www.google.com/maps/dir/${streetName1}+${streetNum1}+${city1}/${streetName2},+${streetNum2}+${city2}`
-    window.open(url, '_blank')
+const embedDirections = (streetName1, streetNum1, city1, streetName2, streetNum2, city2) => {
+    let frame = document.getElementById('map-frame')
+    let url = `https://www.google.com/maps/embed/v1/directions?origin=${streetName1}+${streetNum1}+${city1}&destination=${streetName2},+${streetNum2}+${city2}&key=AIzaSyDCG7VkeOph8JbCwqn79bzRx0aHmaZtDdI`
+    frame.src = url
 }
+
