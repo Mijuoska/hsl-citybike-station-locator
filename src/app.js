@@ -11,7 +11,7 @@
       let myCity = myLocation.data[0].administrative_area
 
       const message = document.getElementById('message')
-      message.innerHTML = `<b>Your current location:</b> ${myLocation.data[0].label}`
+      message.innerHTML = `<i class="fas fa-map-marker-alt"></i> <b>Your current location:</b> ${myLocation.data[0].label}`
       
       // Get bike stations, display them on the screen, calculate the nearest station and display it
       let distances = []
@@ -31,7 +31,7 @@
       let stationDistance = nearestStations[0].distance
 
       document.getElementById('nearest-station').innerHTML =
-          `<b>Your nearest station:</b> ${stationName} - ${stationAddress}, ${stationCity} (${stationDistance} km)`
+          `<i class="fas fa-bicycle"></i> <b>Your nearest station:</b> ${stationName} - ${stationAddress}, ${stationCity} (${stationDistance} km)`
       embedDirections(myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
 
       // creating a list of the next nearest stations, excluding the one already displayed

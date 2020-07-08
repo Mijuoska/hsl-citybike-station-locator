@@ -1,11 +1,28 @@
+body {
+    background-color:#464866;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+     
+}
+
 h1 {
     text-align: center;
+    color: white;
+    background-color: #AAABBB;
+    padding: 5px;
+}
+
+h2 {
+    background-color: #2E9CCA;
+    color: white;
+    width: 81%;
+    padding: 8px;
+    border: 1px solid #2E9CCA;
+    border-radius: 2px;
 }
 
 li {
     list-style: none;
-    width: 60%;
-    padding: 6px;
+    padding: 10px;
     border-bottom: 1px solid #ddd;
     background-color: white;
 }
@@ -32,15 +49,28 @@ li:hover {
 
 
 #location-display {
+    background-color: white;
     border: 1px groove grey;
+    border-radius: 3px;
     width: 80%;
     height: auto;
-    padding: 10px;
+    padding: 12px 12px 12px 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#other-stations {
+    margin-top: 3rem;
+}
+
+#station-list  {
+    width: 84%;
+    padding-left: 0px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 
 #map-frame {
     border: 1px solid grey;
+    border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
