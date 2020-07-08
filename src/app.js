@@ -17,7 +17,7 @@
       let distances = []
       const stations = await getData()
       stations.map(station => {
-        let distance = calculateDistances(latLng.lat, latLng.lng, station.attributes['y'], station.attributes['x'], station)
+        let distance = calculateDistances(latLng.lat, latLng.lng, station.attributes['y'], station.attributes['x'], station, 'K')
         distances.push(distance)
              });
         
@@ -25,18 +25,20 @@
       let nearestStations = calculateNearestStations(distances)
       let stationName = nearestStations[0].station.attributes["Nimi"]
       let stationAddress = nearestStations[0].station.attributes["Osoite"]
-      let stationStreet = stationAddress[0].split(' ')[0]
-      let stationStreetNum = stationAddress[0].split(' ')[1]
+      let stationStreet = stationAddress.split(' ')[0]
+      let stationStreetNum = stationAddress.split(' ')[1]
       let stationCity = nearestStations[0].station.attributes["Kaupunki"]
+      let stationDistance = nearestStations[0].distance
 
       document.getElementById('nearest-station').innerHTML =
-          `<b>Your nearest station:</b> ${stationName} - ${stationAddress}, ${stationCity}`
+          `<b>Your nearest station:</b> ${stationName} - ${stationAddress}, ${stationCity} (${stationDistance} km)`
       embedDirections(myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
 
       // creating a list of the next nearest stations, excluding the one already displayed
       for (let i = 1; i < 6; i++) {
         let station = nearestStations[i].station
-        createStationList(station)
+        let distance = nearestStations[i].distance
+        createStationList(station, distance)
       }
        let locateButtons = document.querySelectorAll('.locate')
        for (let button of locateButtons) {

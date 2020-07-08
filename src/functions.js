@@ -58,7 +58,7 @@ const calculateDistances = (lat1, lon1, lat2, lon2, station, unit) => {
             dist = dist * 0.8684
         }
     }
-     return {station: station, distance: dist};
+     return {station: station, distance: Math.floor(dist * 10) / 10};
 }
 
 const calculateNearestStations = (distances) => {
@@ -77,7 +77,7 @@ const calculateNearestStations = (distances) => {
 
 
 
-const createStationList = (station) => {
+const createStationList = (station, distance) => {
     let li = document.createElement('li')
     let button = document.createElement('button')
     button.id = JSON.stringify({
@@ -86,7 +86,7 @@ const createStationList = (station) => {
     })
     button.classList.add('locate')
     button.innerText = "Show directions"
-    li.innerHTML = `${station.attributes["Nimi"]} - ${station.attributes["Osoite"]}`
+    li.innerHTML = `${station.attributes["Nimi"]} - ${station.attributes["Osoite"]} (${distance} km)`
     li.id = `${station.attributes["Osoite"]}, ${station.attributes["Kaupunki"]}`
     let ul = document.getElementById('station-list')
     ul.appendChild(li)
