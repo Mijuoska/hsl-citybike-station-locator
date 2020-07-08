@@ -1,3 +1,7 @@
+h1 {
+    text-align: center;
+}
+
 li {
     list-style: none;
     width: 30%;
@@ -11,13 +15,27 @@ li:hover {
     transition: 0.3s
 }
 
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
 .locate {
     margin-left: 5px;
 }
 
+
 #location-display {
     border: 1px groove grey;
     width: 40%;
+    height: 120px;
     padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+#map-frame {
+    border: 1px solid grey;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }

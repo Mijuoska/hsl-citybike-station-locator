@@ -35,14 +35,8 @@
 
       document.getElementById('nearest-station').innerHTML =
           `<b>Your nearest station:</b> ${stationName} - ${stationAddress}, ${stationCity}`
-
+      embedDirections(myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
       
-      let showRoute = document.createElement('button')
-      showRoute.innerHTML = 'Show route'
-      document.getElementById('location-display').appendChild(showRoute)
-      showRoute.addEventListener('click', (e) => {
-          openMap(myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
-            })
        })
  
   
