@@ -17,25 +17,31 @@
       let distances = []
       const stations = await getData()
       stations.map(station => {
-        createStationList(station)
         let distance = calculateDistances(latLng.lat, latLng.lng, station.attributes['y'], station.attributes['x'], station)
         distances.push(distance)
              });
         
-        let locateButtons = document.querySelectorAll('.locate')
-        for (let button of locateButtons) {
-          createEventListener(button, myStreetName, myStreetNumber, myCity)
-        }
-      let nearestStation = calculateNearestStation(distances)
-      let stationName = nearestStation.station.attributes["Nimi"]
-      let stationAddress = nearestStation.station.attributes["Osoite"]
-      let stationStreet = stationAddress.split(' ')[0]
-      let stationStreetNum = stationAddress.split(' ')[1]
-      let stationCity = nearestStation.station.attributes["Kaupunki"]
+       
+      let nearestStations = calculateNearestStations(distances)
+      let stationName = nearestStations[0].station.attributes["Nimi"]
+      let stationAddress = nearestStations[0].station.attributes["Osoite"]
+      let stationStreet = stationAddress[0].split(' ')[0]
+      let stationStreetNum = stationAddress[0].split(' ')[1]
+      let stationCity = nearestStations[0].station.attributes["Kaupunki"]
 
       document.getElementById('nearest-station').innerHTML =
           `<b>Your nearest station:</b> ${stationName} - ${stationAddress}, ${stationCity}`
       embedDirections(myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
+
+      // creating a list of the next nearest stations, excluding the one already displayed
+      for (let i = 1; i < 6; i++) {
+        let station = nearestStations[i].station
+        createStationList(station)
+      }
+       let locateButtons = document.querySelectorAll('.locate')
+       for (let button of locateButtons) {
+         createEventListener(button, myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
+       }
       
        })
  
