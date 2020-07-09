@@ -47,6 +47,24 @@ li:hover {
     margin-left: 5px;
 }
 
+.animate-load {
+position: relative;
+-webkit-animation-name: animate-load;
+-webkit-animation-duration: 1s;
+animation-name: animate-load;
+animation-duration: 1s
+}
+
+@-webkit-keyframes animate-load {
+  from { opacity:0 } 
+  to { opacity:1 }
+}
+
+@keyframes animate-load { 
+  from{ opacity:0 } 
+  to{ opacity:1 }
+}
+
 
 #location-display {
     background-color: white;
@@ -60,7 +78,10 @@ li:hover {
 
 #other-stations {
     margin-top: 3rem;
+    
 }
+
+
 
 #station-list  {
     width: 84%;
@@ -74,3 +95,37 @@ li:hover {
     border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
+
+
+#loader {
+    position: absolute;
+    left: 20%;
+    top: 56%;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #3498db;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-load {
+    position: relative;
+    -webkit-animation-name: animate-load;
+    -webkit-animation-duration: 1s;
+    animation-name: animate-load;
+    animation-duration: 1s
+}
+

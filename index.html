@@ -9,7 +9,7 @@
 
 </head>
 
-<body>
+<body onload="onPageLoad()">
 <h1>Find a City Bike Station</h1>
 <div class="row">
 <div class="column">
@@ -17,7 +17,8 @@
 <p id="message"></p>
 <p id="nearest-station"></p>
 </div>
-<div id="other-stations">
+<div id="loader" style="display:block"></div>
+<div class="animate-load" id="other-stations" style="display:none;">
 <h2>Other stations near you</h2>
 <ul id="station-list"></ul>
 </div>
@@ -31,7 +32,17 @@
 </div>
 </div>
 
-  
+  <script>
+    function onPageLoad() {
+        setTimeout(showPage, 3000);
+    }
+
+    function showPage() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("other-stations").style.display = "block";
+    }
+</script>
+
 
 <script src="src/functions.js"></script>
 <script src="src/requests.js"></script>
