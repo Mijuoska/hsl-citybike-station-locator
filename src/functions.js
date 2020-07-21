@@ -1,5 +1,6 @@
 
-const getLocation = (options, callback) => {
+
+const getLocation = (options, showError, callback) => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) =>{
             let latLng = {
@@ -95,20 +96,41 @@ const createStationList = (station, distance) => {
 
 
 
-const createEventListener = (button, myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity) => {
-    button.addEventListener('click', (e) => {
-        let id = e.path[1].id
-        let stationStreet = id.split(' ')[0]
-        let stationStreetNum = id.split(' ')[1].replace(/,/, '')
-        let stationCity = id.split(',')[1].trim()
-        embedDirections(myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
-        });
+const initMap = (map, geolocate, directions, {
+        myStreetName,
+        myStreetNumber,
+        myCity,
+        stationStreet,
+        stationStreetNum,
+        stationCity
+    }) => {
+    map.addControl(geolocate)
+    map.addControl(directions)
 
+    map.on('load'), () => {
+
+        getInitialDirections(directions, myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
+}
     }
 
-const embedDirections = (streetName1, streetNum1, city1, streetName2, streetNum2, city2) => {
-    let frame = document.getElementById('map-frame')
-    let url = `https://www.google.com/maps/embed/v1/directions?origin=${streetName1}+${streetNum1}+${city1}&destination=${streetName2},+${streetNum2}+${city2}&key=AIzaSyDCG7VkeOph8JbCwqn79bzRx0aHmaZtDdI`
-    frame.src = url
+const getInitialDirections = (directions, 
+        myStreetName,
+        myStreetNumber,
+        myCity,
+        stationStreet,
+        stationStreetNum,
+        stationCity
+    ) => {
+        directions.setOrigin(`${myStreetName} ${myStreetNumber}, ${myCity}`)
+        directions.setDestination(`${stationStreet}, ${stationStreetNum}, ${stationCity}`)
+    }
+
+const getDirections = (directions, { myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity }) => {
+    directions.setOrigin(`${myStreetName} ${myStreetNumber}, ${myCity}`)
+    directions.setDestination(`${stationStreet}, ${stationStreetNum}, ${stationCity}`)
 }
 
+
+
+
+export { getLocation, showError, calculateDistances, calculateNearestStations, createStationList, initMap, getDirections }

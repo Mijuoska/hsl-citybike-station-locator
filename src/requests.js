@@ -1,7 +1,8 @@
 
 const decodeLocation = async (lat, lng) => {
-    const accessKey = 'f72ab3091da44368e85960953ca1b694'
-    const url = `http://api.positionstack.com/v1/reverse?access_key=${accessKey}&query=${lat},${lng}`
+    const url = `https://secret-mountain-81703.herokuapp.com/geocoding&query=${lat},${lng}`
+  //  const url = `https://secret-mountain-81703.herokuapp.com/geocoding?query=${lat},${lng}`
+
     const response = await fetch(url)
     if (response.status === 200) {
         const result = await response.json()
@@ -26,7 +27,7 @@ const getData = async () => {
     }
 }
 
-
+export { decodeLocation, getData }
 
 
 

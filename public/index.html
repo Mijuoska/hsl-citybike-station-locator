@@ -3,8 +3,10 @@
 
 <head>
     <title>Find a City Bike Station</title>
-    <link rel="stylesheet" type="text/css" href="/public/styles.css">
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
     <script src="https://kit.fontawesome.com/c51fd8968b.js" crossorigin="anonymous"></script>
+
 
 
 </head>
@@ -23,13 +25,9 @@
 <ul id="station-list"></ul>
 </div>
 </div>
-<div id='map' class="column">
-<iframe id="map-frame" width="500" height="450" frameborder="0" 
-    src=""
-    allowfullscreen></iframe>
+<div id="mapbox" class="column"></div>
 
 
-</div>
 </div>
 
   <script>
@@ -44,9 +42,7 @@
 </script>
 
 
-<script src="src/functions.js"></script>
-<script src="src/requests.js"></script>
-<script src="src/app.js"></script>
+<script src="scripts/bundle.js"></script>
 </body>
 
 </html>

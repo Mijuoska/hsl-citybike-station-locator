@@ -5,9 +5,12 @@
   "main": "app.js",
   "dependencies": {
     "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@mapbox/mapbox-gl-directions": "^4.0.3",
     "babel-loader": "^8.1.0",
-    "babel-preset-env": "^1.7.0",
+    "babel-polyfill": "^6.26.0",
     "buffer": "^4.9.2",
+    "dotenv": "^8.2.0",
     "emojis-list": "^3.0.0",
     "esrecurse": "^4.2.1",
     "estraverse": "^4.3.0",
@@ -25,6 +28,7 @@
     "iferr": "^0.1.5",
     "imurmurhash": "^0.1.4",
     "live-server": "^1.2.1",
+    "mapbox-gl": "^1.11.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"

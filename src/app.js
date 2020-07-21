@@ -1,10 +1,13 @@
-
+import { getLocation, showError, calculateDistances, calculateNearestStations, createStationList, initMap, getDirections } from './functions' 
+import { decodeLocation, getData } from './requests'
+import { map, geolocate, directions } from './map'
+ 
  const options = {
      enableHighAccuracy: true,
      timeout: 10000
  };
     // Get current location and display it
- getLocation(options, async(latLng) => {
+ getLocation(options, showError, async(latLng) => {
       let myLocation = await decodeLocation(latLng.lat, latLng.lng)
       let myStreetName = myLocation.data[0].street ? myLocation.data[0].street : myLocation.data[0].name
       let myStreetNumber = myLocation.data[0].number ? myLocation.data[0].number : ""
@@ -29,10 +32,19 @@
       let stationStreetNum = stationAddress.split(' ')[1]
       let stationCity = nearestStations[0].station.attributes["Kaupunki"]
       let stationDistance = nearestStations[0].distance
+      
+      const originDestination = {
+        myStreetName: myStreetName,
+        myStreetNumber: myStreetNumber,
+        myCity: myCity,
+        stationStreet: stationStreet,
+        stationStreetNumber: stationStreetNum,
+        stationCity: stationCity
+      }
 
       document.getElementById('nearest-station').innerHTML =
           `<i class="fas fa-bicycle"></i> <b>Your nearest station:</b> ${stationName} - ${stationAddress}, ${stationCity} (${stationDistance} km)`
-      embedDirections(myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
+       initMap(map, geolocate, directions, originDestination)
 
       // creating a list of the next nearest stations, excluding the one already displayed
       for (let i = 1; i < 6; i++) {
@@ -42,11 +54,22 @@
       }
        let locateButtons = document.querySelectorAll('.locate')
        for (let button of locateButtons) {
-         createEventListener(button, myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
+          button.addEventListener('click', (e) => {
+            let id = e.path[1].id
+            let newStationStreet = id.split(' ')[0]
+            let newStationStreetNum = id.split(' ')[1].replace(/,/, '')
+            let newStationCity = id.split(',')[1].trim()
+            originDestination.stationStreet = newStationStreet,
+            originDestination.stationStreetNumber = newStationStreetNum,
+            originDestination.stationCity = newStationCity
+            getDirections(directions, originDestination)
+          });
        }
-      
-       })
+
+       });
+
  
+       
   
 
 
