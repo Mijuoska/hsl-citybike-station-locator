@@ -106,11 +106,10 @@ const initMap = (map, geolocate, directions, {
     }) => {
     map.addControl(geolocate)
     map.addControl(directions)
-
-    map.on('load'), () => {
-
-        getInitialDirections(directions, myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
-}
+    map.on('load', function () {
+    geolocate.trigger()
+    getInitialDirections(directions, myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
+    })
     }
 
 const getInitialDirections = (directions, 
