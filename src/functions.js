@@ -96,40 +96,10 @@ const createStationList = (station, distance) => {
 
 
 
-const initMap = (map, geolocate, directions, {
-        myStreetName,
-        myStreetNumber,
-        myCity,
-        stationStreet,
-        stationStreetNum,
-        stationCity
-    }) => {
-    map.addControl(geolocate)
-    map.addControl(directions)
-    map.on('load', function () {
-    geolocate.trigger()
-    getInitialDirections(directions, myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
-    })
-    }
-
-const getInitialDirections = (directions, 
-        myStreetName,
-        myStreetNumber,
-        myCity,
-        stationStreet,
-        stationStreetNum,
-        stationCity
-    ) => {
-        directions.setOrigin(`${myStreetName} ${myStreetNumber}, ${myCity}`)
-        directions.setDestination(`${stationStreet}, ${stationStreetNum}, ${stationCity}`)
-    }
-
-const getDirections = (directions, { myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity }) => {
-    directions.setOrigin(`${myStreetName} ${myStreetNumber}, ${myCity}`)
-    directions.setDestination(`${stationStreet}, ${stationStreetNum}, ${stationCity}`)
-}
 
 
 
 
-export { getLocation, showError, calculateDistances, calculateNearestStations, createStationList, initMap, getDirections }
+
+
+export { getLocation, showError, calculateDistances, calculateNearestStations, createStationList }

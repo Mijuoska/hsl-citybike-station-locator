@@ -1,7 +1,6 @@
 
 const decodeLocation = async (lat, lng) => {
-    const url = `https://secret-mountain-81703.herokuapp.com/geocoding&query=${lat},${lng}`
-  //  const url = `https://secret-mountain-81703.herokuapp.com/geocoding?query=${lat},${lng}`
+   const url = `https://secret-mountain-81703.herokuapp.com/geocoding&query=${lat},${lng}`
 
     const response = await fetch(url)
     if (response.status === 200) {

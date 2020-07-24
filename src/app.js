@@ -1,6 +1,6 @@
-import { getLocation, showError, calculateDistances, calculateNearestStations, createStationList, initMap, getDirections } from './functions' 
+import { getLocation, showError, calculateDistances, calculateNearestStations, createStationList } from './functions' 
 import { decodeLocation, getData } from './requests'
-import { map, geolocate, directions } from './map'
+import Map from './map'
  
  const options = {
      enableHighAccuracy: true,
@@ -44,7 +44,9 @@ import { map, geolocate, directions } from './map'
 
       document.getElementById('nearest-station').innerHTML =
           `<i class="fas fa-bicycle"></i> <b>Your nearest station:</b> ${stationName} - ${stationAddress}, ${stationCity} (${stationDistance} km)`
-       initMap(map, geolocate, directions, originDestination)
+       
+      const map = new Map()  
+      map.initMap(originDestination)
 
       // creating a list of the next nearest stations, excluding the one already displayed
       for (let i = 1; i < 6; i++) {
@@ -62,7 +64,7 @@ import { map, geolocate, directions } from './map'
             originDestination.stationStreet = newStationStreet,
             originDestination.stationStreetNumber = newStationStreetNum,
             originDestination.stationCity = newStationCity
-            getDirections(directions, originDestination)
+            map.getDirections(originDestination)
           });
        }
 
