@@ -47,7 +47,6 @@ import Map from './map'
        
       const map = new Map()  
       map.initMap(originDestination)
-
       // creating a list of the next nearest stations, excluding the one already displayed
       for (let i = 1; i < 6; i++) {
         let station = nearestStations[i].station
@@ -57,14 +56,24 @@ import Map from './map'
        let locateButtons = document.querySelectorAll('.locate')
        for (let button of locateButtons) {
           button.addEventListener('click', (e) => {
+            const newDestination = { ...originDestination }
             let id = e.path[1].id
-            let newStationStreet = id.split(' ')[0]
-            let newStationStreetNum = id.split(' ')[1].replace(/,/, '')
-            let newStationCity = id.split(',')[1].trim()
-            originDestination.stationStreet = newStationStreet,
-            originDestination.stationStreetNumber = newStationStreetNum,
-            originDestination.stationCity = newStationCity
-            map.getDirections(originDestination)
+            newDestination.stationStreet = id.split(' ')[0]
+            newDestination.stationStreetNumber = id.split(' ')[1].replace(/,/, '')
+            newDestination.stationCity = id.split(',')[1].trim()
+            map.getDirections(newDestination)
+            let nearestStationButton
+            if (!document.getElementById('nearest-station-button')) {
+            nearestStationButton = document.createElement('button') 
+            nearestStationButton.id = 'nearest-station-button'
+            nearestStationButton.innerHTML = 'Show nearest station'
+            document.getElementById('nearest-station').appendChild(nearestStationButton)
+               nearestStationButton.addEventListener('click', () => {
+                 map.getDirections(originDestination)
+
+               })
+            } 
+
           });
        }
 

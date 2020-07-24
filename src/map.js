@@ -46,8 +46,6 @@ class Map {
         stationCity
     })  {
         this.map.addControl(this.geolocate)
-        console.log(this.geolocate)
-
         this.map.addControl(this.directions)
         const geolocate = this.geolocationTrigger.bind(this)
         const getInitialDirections = this.getInitialDirections.bind(this)
