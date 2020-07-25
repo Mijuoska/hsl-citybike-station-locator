@@ -4,7 +4,9 @@ import * as MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-d
 
 
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibWlqdW9za2EiLCJhIjoiY2tjcmM3MTNqMGNmOTJ4anZ4dmZpaXRtcCJ9.47nXKdL555B6Bddfjwje1g';
+const token = "secret"
+
+mapboxgl.accessToken = token;
 
 class Map {
     constructor() {
@@ -21,7 +23,7 @@ class Map {
         });
        
         this.directions = new MapboxDirections({
-            accessToken: 'pk.eyJ1IjoibWlqdW9za2EiLCJhIjoiY2tjcmM3MTNqMGNmOTJ4anZ4dmZpaXRtcCJ9.47nXKdL555B6Bddfjwje1g',
+            accessToken: token,
             unit: 'metric',
             profile: 'mapbox/walking',
             controls: {
