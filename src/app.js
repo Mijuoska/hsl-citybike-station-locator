@@ -2,13 +2,12 @@ import { getLocation, showError, calculateDistances, calculateNearestStations, c
 import { decodeLocation, getData } from './requests'
 import Map from './map'
  
- const options = {
-     enableHighAccuracy: true,
-     timeout: 10000
- };
+      const map = new Map()
+
     // Get current location and display it
- getLocation(options, showError, async(latLng) => {
+ getLocation(map.options, showError, async(latLng) => {
       let myLocation = await decodeLocation(latLng.lat, latLng.lng)
+      
       let myStreetName = myLocation.data[0].street ? myLocation.data[0].street : myLocation.data[0].name
       let myStreetNumber = myLocation.data[0].number ? myLocation.data[0].number : ""
       let myCity = myLocation.data[0].administrative_area
@@ -33,6 +32,7 @@ import Map from './map'
       let stationCity = nearestStations[0].station.attributes["Kaupunki"]
       let stationDistance = nearestStations[0].distance
       
+
       const originDestination = {
         myStreetName: myStreetName,
         myStreetNumber: myStreetNumber,
@@ -45,7 +45,6 @@ import Map from './map'
       document.getElementById('nearest-station').innerHTML =
           `<i class="fas fa-bicycle"></i> <b>Your nearest station:</b> ${stationName} - ${stationAddress}, ${stationCity} (${stationDistance} km)`
        
-      const map = new Map()  
       map.initMap(originDestination)
       // creating a list of the next nearest stations, excluding the one already displayed
       for (let i = 1; i < 6; i++) {
@@ -67,6 +66,7 @@ import Map from './map'
             nearestStationButton = document.createElement('button') 
             nearestStationButton.id = 'nearest-station-button'
             nearestStationButton.innerHTML = 'Show nearest station'
+            nearestStationButton.classList.add('locate')
             document.getElementById('nearest-station').appendChild(nearestStationButton)
                nearestStationButton.addEventListener('click', () => {
                  map.getDirections(originDestination)

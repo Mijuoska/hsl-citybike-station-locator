@@ -96,10 +96,4 @@ const createStationList = (station, distance) => {
 
 
 
-
-
-
-
-
-
 export { getLocation, showError, calculateDistances, calculateNearestStations, createStationList }

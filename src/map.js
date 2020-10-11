@@ -30,6 +30,11 @@ class Map {
                 profileSwitcher: false
             }
         });
+
+        this.options = {
+                enableHighAccuracy: true,
+                timeout: 10000
+            };
     }
 
     geolocationTrigger() {
