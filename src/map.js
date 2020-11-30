@@ -41,8 +41,11 @@ class Map {
          this.geolocate.trigger()
     }
 
-    initMap (
-        {
+    initMap ()  {
+        this.map.addControl(this.geolocate)
+        this.map.addControl(this.directions)
+    }
+    getInitialDirections ({
         myStreetName,
         myStreetNumber,
         myCity,
@@ -50,23 +53,7 @@ class Map {
         stationStreetNum,
         stationCity
     })  {
-        this.map.addControl(this.geolocate)
-        this.map.addControl(this.directions)
-        const geolocate = this.geolocationTrigger.bind(this)
-        const getInitialDirections = this.getInitialDirections.bind(this)
-        this.map.on('load', function () {
-            geolocate()
-            getInitialDirections(myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity)
-        })
-    }
-    getInitialDirections (
-        myStreetName,
-        myStreetNumber,
-        myCity,
-        stationStreet,
-        stationStreetNum,
-        stationCity
-    )  {
+        this.geolocationTrigger()
         this.directions.setOrigin(`${myStreetName} ${myStreetNumber}, ${myCity}`)
         this.directions.setDestination(`${stationStreet}, ${stationStreetNum}, ${stationCity}`)
     }

@@ -1,7 +1,6 @@
 
 
 const getLocation = (options, showError, callback) => {
-    if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) =>{
             let latLng = {
                 lat: position.coords.latitude,
@@ -11,9 +10,26 @@ const getLocation = (options, showError, callback) => {
         }, showError, options)
 
 
-    } else {
-        message.innerHTML = "Geolocation is not supported by this browser."
-    }
+    } 
+
+ const parseLocation = (myLocation) => {
+     const locationObject = {}
+     locationObject['myStreetName'] = myLocation.data[0].street ? myLocation.data[0].street : myLocation.data[0].name
+     locationObject['myStreetNumber'] = myLocation.data[0].number ? myLocation.data[0].number : ""
+     locationObject['myCity'] = myLocation.data[0].administrative_area
+     return locationObject
+ }
+
+
+const parseNearestStation = (nearestStations) => {
+ const stationObject = {}
+ stationObject["stationAddress"] = nearestStations[0].station.attributes["Osoite"]
+ stationObject["stationName"] = nearestStations[0].station.attributes["Nimi"]
+ stationObject["stationStreet"] = stationObject["stationAddress"].split(' ')[0]
+ stationObject["stationStreetNum"] = stationObject["stationAddress"].split(' ')[1]
+ stationObject["stationCity"] = nearestStations[0].station.attributes["Kaupunki"]
+ stationObject["stationDistance"] = nearestStations[0].distance
+ return stationObject
 }
 
 const showError = (error) => {
@@ -96,4 +112,4 @@ const createStationList = (station, distance) => {
 
 
 
-export { getLocation, showError, calculateDistances, calculateNearestStations, createStationList }
+export { getLocation, parseLocation, showError, calculateDistances, calculateNearestStations, parseNearestStation, createStationList }
