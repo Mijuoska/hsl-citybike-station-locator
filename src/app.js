@@ -1,4 +1,4 @@
-import { getLocation, parseLocation, showError, calculateDistances, calculateNearestStations, parseNearestStation, createStationList } from './functions' 
+import { getLocation, parseLocation, showError, displayInfo, calculateDistances, calculateNearestStations, parseNearestStation, createStationList } from './functions' 
 import { decodeLocation, getData } from './requests'
 import Map from './map'
  
@@ -13,18 +13,16 @@ if (container.classList.value === 'hide') {
 }
 
  if (navigator.geolocation) {
+  
    const locateMe = document.getElementById('locate-me')
-   locateMe.addEventListener('click', function () {
+   // locateMe.addEventListener('click', function () {
 
          // Get current location and display it
          getLocation(map.options, showError, async (latLng) => {
            let myLocation = await decodeLocation(latLng.lat, latLng.lng)
            window.localStorage.setItem('myLocation', JSON.stringify(myLocation))
-
-           const message = document.getElementById('message')
-           message.classList.remove('hide');
-           const currentLocationText = document.getElementById('current-location-text')
-           currentLocationText.textContent = myLocation.data[0].label
+          displayInfo('message', 'current-location-text', myLocation.data[0].label)
+          
 
            // Get bike stations, display them on the screen, calculate the nearest station and display it
            let distances = []
@@ -59,11 +57,11 @@ if (container.classList.value === 'hide') {
              stationCity: stationCity
            }
 
+          
+
           map.getInitialDirections(originDestination)
-          let nearestStation = document.getElementById('nearest-station')
-          nearestStation.classList.remove('hide')
-          const nearestStationText = document.getElementById('nearest-station-text')
-          nearestStationText.textContent = `${stationName} - ${stationAddress}, ${stationCity} (${stationDistance} km)`
+          const stationString = `${stationName} - ${stationAddress}, ${stationCity} (${stationDistance} km)`
+          displayInfo('nearest-station', 'nearest-station-text', stationString)
 
            // creating a list of the next nearest stations, excluding the one already displayed
           
@@ -108,7 +106,7 @@ if (container.classList.value === 'hide') {
      container.classList.add('hide')
     setTimeout(function() {map.geolocationTrigger()}, 1000)
 
-   })
+//   })
  } else {
    message.innerHTML = "Geolocation is not supported by this browser."
  }

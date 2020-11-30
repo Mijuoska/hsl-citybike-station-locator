@@ -12,6 +12,13 @@ const getLocation = (options, showError, callback) => {
 
     } 
 
+ function displayInfo(containerElemName, textElemName, elemTextContent) {
+     const containerElem = document.getElementById(containerElemName)
+     containerElem.classList.remove('hide');
+     const textElem = document.getElementById(textElemName)
+     textElem.textContent = elemTextContent
+ }
+
  const parseLocation = (myLocation) => {
      const locationObject = {}
      locationObject['myStreetName'] = myLocation.data[0].street ? myLocation.data[0].street : myLocation.data[0].name
@@ -112,4 +119,4 @@ const createStationList = (station, distance) => {
 
 
 
-export { getLocation, parseLocation, showError, calculateDistances, calculateNearestStations, parseNearestStation, createStationList }
+export { getLocation, parseLocation, showError, displayInfo, calculateDistances, calculateNearestStations, parseNearestStation, createStationList }
