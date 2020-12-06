@@ -1,4 +1,4 @@
-
+import { getData } from './requests'
 
 const getLocation = (options, showError, callback) => {
         navigator.geolocation.getCurrentPosition((position) =>{
@@ -33,7 +33,7 @@ const parseNearestStation = (nearestStations) => {
  stationObject["stationAddress"] = nearestStations[0].station.attributes["Osoite"]
  stationObject["stationName"] = nearestStations[0].station.attributes["Nimi"]
  stationObject["stationStreet"] = stationObject["stationAddress"].split(' ')[0]
- stationObject["stationStreetNum"] = stationObject["stationAddress"].split(' ')[1]
+ stationObject["stationStreetNumber"] = stationObject["stationAddress"].split(' ')[1]
  stationObject["stationCity"] = nearestStations[0].station.attributes["Kaupunki"]
  stationObject["stationDistance"] = nearestStations[0].distance
  return stationObject
@@ -60,7 +60,7 @@ const showError = (error) => {
 
 
 
-const calculateDistances = (lat1, lon1, lat2, lon2, station, unit) => {
+const calculateDistance = (lat1, lon1, lat2, lon2, station, unit) => {
     if ((lat1 == lat2) && (lon1 == lon2)) {
         return 0;
     } else {
@@ -83,7 +83,17 @@ const calculateDistances = (lat1, lon1, lat2, lon2, station, unit) => {
         }
     }
      return {station: station, distance: Math.floor(dist * 10) / 10};
-}
+}  
+
+  const getDistances = async (latLng) => {
+    const distances = []
+    const stations = await getData()
+    stations.map(station => {
+    const distance = calculateDistance(latLng.lat, latLng.lng, station.attributes['y'], station.attributes['x'], station, 'K')
+    distances.push(distance)
+    });
+    return distances
+    }
 
 const calculateNearestStations = (distances) => {
     let sorted = distances.sort((a, b) => {
@@ -101,7 +111,7 @@ const calculateNearestStations = (distances) => {
 
 
 
-const createStationList = (station, distance) => {
+const createStationListElement = (station, distance) => {
     let li = document.createElement('li')
     let button = document.createElement('button')
     button.id = JSON.stringify({
@@ -117,6 +127,16 @@ const createStationList = (station, distance) => {
     li.appendChild(button)
 }
 
+const createStationList = (nearestStations) => {
+     const stationsContainer = document.getElementById('other-stations-container')
+     stationsContainer.classList.remove('hide')
+     for (let i = 1; i < 6; i++) {
+         let station = nearestStations[i].station
+         let distance = nearestStations[i].distance
+         createStationListElement(station, distance)
+     }
+}
 
 
-export { getLocation, parseLocation, showError, displayInfo, calculateDistances, calculateNearestStations, parseNearestStation, createStationList }
+
+export { getLocation, parseLocation, showError, displayInfo, calculateDistance, getDistances, calculateNearestStations, parseNearestStation, createStationList }

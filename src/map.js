@@ -50,16 +50,18 @@ class Map {
         myStreetNumber,
         myCity,
         stationStreet,
-        stationStreetNum,
+        stationStreetNumber,
         stationCity
-    })  {
+    }, latLng)  {
         this.geolocationTrigger()
         this.directions.setOrigin(`${myStreetName} ${myStreetNumber}, ${myCity}`)
-        this.directions.setDestination(`${stationStreet}, ${stationStreetNum}, ${stationCity}`)
+        this.directions.setDestination(`${stationStreet}, ${stationStreetNumber}, ${stationCity}`)
     }
-    getDirections ({ myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNum, stationCity }) {
+    getDirections ({ myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNumber, stationCity }) {
     this.directions.setOrigin(`${myStreetName} ${myStreetNumber}, ${myCity}`)
-    this.directions.setDestination(`${stationStreet}, ${stationStreetNum}, ${stationCity}`)
+    this.directions.setDestination(`${stationStreet}, ${stationStreetNumber}, ${stationCity}`)
+    
+
 }
 
 }

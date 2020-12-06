@@ -1,5 +1,5 @@
-import { getLocation, parseLocation, showError, displayInfo, calculateDistances, calculateNearestStations, parseNearestStation, createStationList } from './functions' 
-import { decodeLocation, getData } from './requests'
+import { getLocation, parseLocation, showError, displayInfo, getDistances, calculateNearestStations, parseNearestStation, createStationList } from './functions' 
+import { decodeLocation } from './requests'
 import Map from './map'
  
 const map = new Map()
@@ -25,14 +25,8 @@ if (container.classList.value === 'hide') {
           
 
            // Get bike stations, display them on the screen, calculate the nearest station and display it
-           let distances = []
-           const stations = await getData()
-           stations.map(station => {
-             let distance = calculateDistances(latLng.lat, latLng.lng, station.attributes['y'], station.attributes['x'], station, 'K')
-             distances.push(distance)
-           });
-
-
+         
+           const distances = await getDistances(latLng)
            const nearestStations = calculateNearestStations(distances)
          
 
@@ -56,23 +50,13 @@ if (container.classList.value === 'hide') {
              stationStreetNumber: stationStreetNumber,
              stationCity: stationCity
            }
-
-          
-
-          map.getInitialDirections(originDestination)
+          map.getInitialDirections(originDestination, latLng)
           const stationString = `${stationName} - ${stationAddress}, ${stationCity} (${stationDistance} km)`
           displayInfo('nearest-station', 'nearest-station-text', stationString)
 
            // creating a list of the next nearest stations, excluding the one already displayed
-          
-           const stationsContainer = document.getElementById('other-stations-container')
-           stationsContainer.classList.remove('hide')
-
-           for (let i = 1; i < 6; i++) {
-             let station = nearestStations[i].station
-             let distance = nearestStations[i].distance
-             createStationList(station, distance)
-           }
+           createStationList(nearestStations)
+ 
            let locateButtons = document.querySelectorAll('.locate')
            for (let button of locateButtons) {
              button.addEventListener('click', (e) => {
@@ -84,6 +68,7 @@ if (container.classList.value === 'hide') {
                newDestination.stationStreetNumber = id.split(' ')[1].replace(/,/, '')
                newDestination.stationCity = id.split(',')[1].trim()
                map.getDirections(newDestination)
+          
                let nearestStationButton
                if (!document.getElementById('nearest-station-button')) {
                  nearestStationButton = document.createElement('button')
@@ -93,7 +78,7 @@ if (container.classList.value === 'hide') {
                  document.getElementById('nearest-station').appendChild(nearestStationButton)
                  nearestStationButton.addEventListener('click', () => {
                    map.getDirections(originDestination)
-                   
+                  
 
                  })
                }
