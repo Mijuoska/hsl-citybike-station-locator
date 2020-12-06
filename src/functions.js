@@ -1,8 +1,7 @@
-import { getData } from './requests'
 
 const getLocation = (options, showError, callback) => {
         navigator.geolocation.getCurrentPosition((position) =>{
-            let latLng = {
+            const latLng = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             }
@@ -30,6 +29,8 @@ const getLocation = (options, showError, callback) => {
 
 const parseNearestStation = (nearestStations) => {
  const stationObject = {}
+ stationObject["x"] = nearestStations[0].station.attributes["x"]
+ stationObject["y"] = nearestStations[0].station.attributes["y"]
  stationObject["stationAddress"] = nearestStations[0].station.attributes["Osoite"]
  stationObject["stationName"] = nearestStations[0].station.attributes["Nimi"]
  stationObject["stationStreet"] = stationObject["stationAddress"].split(' ')[0]
@@ -85,9 +86,8 @@ const calculateDistance = (lat1, lon1, lat2, lon2, station, unit) => {
      return {station: station, distance: Math.floor(dist * 10) / 10};
 }  
 
-  const getDistances = async (latLng) => {
+  const getDistances = (latLng, stations) => {
     const distances = []
-    const stations = await getData()
     stations.map(station => {
     const distance = calculateDistance(latLng.lat, latLng.lng, station.attributes['y'], station.attributes['x'], station, 'K')
     distances.push(distance)
@@ -108,6 +108,7 @@ const calculateNearestStations = (distances) => {
         return sorted
 
 }
+
 
 
 

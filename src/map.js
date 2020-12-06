@@ -52,15 +52,26 @@ class Map {
         stationStreet,
         stationStreetNumber,
         stationCity
-    }, latLng)  {
-        this.geolocationTrigger()
+    }, midpoint)  {
         this.directions.setOrigin(`${myStreetName} ${myStreetNumber}, ${myCity}`)
         this.directions.setDestination(`${stationStreet}, ${stationStreetNumber}, ${stationCity}`)
+       console.log('midpoint: ' + midpoint)
+    setTimeout(() => {
+        this.map.easeTo({
+            center: midpoint,
+        })
+    }, (5000));
+       
+        console.log(midpoint)
+        
+      
     }
-    getDirections ({ myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNumber, stationCity }) {
+    getDirections ({ myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNumber, stationCity }, midpoint) {
     this.directions.setOrigin(`${myStreetName} ${myStreetNumber}, ${myCity}`)
     this.directions.setDestination(`${stationStreet}, ${stationStreetNumber}, ${stationCity}`)
-    
+    this.map.easeTo({
+        center: midpoint
+    })
 
 }
 

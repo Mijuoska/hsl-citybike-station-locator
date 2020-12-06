@@ -1,9 +1,10 @@
 import { getLocation, parseLocation, showError, displayInfo, getDistances, calculateNearestStations, parseNearestStation, createStationList } from './functions' 
-import { decodeLocation } from './requests'
+import { decodeLocation, getData } from './requests'
 import Map from './map'
  
 const map = new Map()
-map.initMap()
+  map.initMap()
+
 
 
 const container = document.getElementsByClassName('container')[0]
@@ -16,9 +17,9 @@ if (container.classList.value === 'hide') {
   
    const locateMe = document.getElementById('locate-me')
    // locateMe.addEventListener('click', function () {
-
          // Get current location and display it
          getLocation(map.options, showError, async (latLng) => {
+           console.log(latLng)
            let myLocation = await decodeLocation(latLng.lat, latLng.lng)
            window.localStorage.setItem('myLocation', JSON.stringify(myLocation))
            document.getElementById('location-display').classList.remove('hide')
@@ -26,14 +27,17 @@ if (container.classList.value === 'hide') {
           
 
            // Get bike stations, display them on the screen, calculate the nearest station and display it
-         
-           const distances = await getDistances(latLng)
+           const stations = await getData()
+           window.localStorage.setItem('stations', JSON.stringify(stations))
+           const distances = getDistances(latLng, stations)
            const nearestStations = calculateNearestStations(distances)
          
 
            const { myStreetName, myStreetNumber, myCity } = parseLocation(myLocation)
 
                      const {
+                       x,
+                       y,
                        stationName,
                        stationAddress,
                        stationStreet,
@@ -51,7 +55,13 @@ if (container.classList.value === 'hide') {
              stationStreetNumber: stationStreetNumber,
              stationCity: stationCity
            }
-          map.getInitialDirections(originDestination, latLng)
+ 
+          map.map.on('load', function() {
+         // const midpoint = calculateMidpoint([latLng.lng, latLng.lat], [x, y])
+          map.map.resize()
+          map.getInitialDirections(originDestination)
+
+          })
           const stationString = `${stationName} - ${stationAddress}, ${stationCity} (${stationDistance} km)`
           displayInfo('nearest-station', 'nearest-station-text', stationString)
 
@@ -68,7 +78,8 @@ if (container.classList.value === 'hide') {
                newDestination.stationStreet = id.split(' ')[0]
                newDestination.stationStreetNumber = id.split(' ')[1].replace(/,/, '')
                newDestination.stationCity = id.split(',')[1].trim()
-               map.getDirections(newDestination)
+               const midpoint = calculateMidpoint([latLng.lng, latLng.lat], [x, y])
+               map.getDirections(newDestination, midpoint)
           
                let nearestStationButton
                if (!document.getElementById('nearest-station-button')) {
@@ -87,10 +98,12 @@ if (container.classList.value === 'hide') {
              });
            }
 
+
+           
          });
 
      container.classList.add('hide')
-    setTimeout(function() {map.geolocationTrigger()}, 1000)
+    
 
 //   })
  } else {
