@@ -21,6 +21,7 @@ if (container.classList.value === 'hide') {
          getLocation(map.options, showError, async (latLng) => {
            let myLocation = await decodeLocation(latLng.lat, latLng.lng)
            window.localStorage.setItem('myLocation', JSON.stringify(myLocation))
+           document.getElementById('location-display').classList.remove('hide')
           displayInfo('message', 'current-location-text', myLocation.data[0].label)
           
 
