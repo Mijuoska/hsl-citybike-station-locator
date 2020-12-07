@@ -96,7 +96,10 @@ if (container.classList.value === 'hide') {
          });
 
      container.classList.add('hide')
+<<<<<<< HEAD
     
+=======
+>>>>>>> UI
 
 //   })
  } else {
