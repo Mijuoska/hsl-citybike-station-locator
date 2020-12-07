@@ -29,8 +29,6 @@ const getLocation = (options, showError, callback) => {
 
 const parseNearestStation = (nearestStations) => {
  const stationObject = {}
- stationObject["x"] = nearestStations[0].station.attributes["x"]
- stationObject["y"] = nearestStations[0].station.attributes["y"]
  stationObject["stationAddress"] = nearestStations[0].station.attributes["Osoite"]
  stationObject["stationName"] = nearestStations[0].station.attributes["Nimi"]
  stationObject["stationStreet"] = stationObject["stationAddress"].split(' ')[0]

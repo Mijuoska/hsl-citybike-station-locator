@@ -19,16 +19,13 @@ if (container.classList.value === 'hide') {
    // locateMe.addEventListener('click', function () {
          // Get current location and display it
          getLocation(map.options, showError, async (latLng) => {
-           console.log(latLng)
            let myLocation = await decodeLocation(latLng.lat, latLng.lng)
-           window.localStorage.setItem('myLocation', JSON.stringify(myLocation))
            document.getElementById('location-display').classList.remove('hide')
           displayInfo('message', 'current-location-text', myLocation.data[0].label)
           
 
            // Get bike stations, display them on the screen, calculate the nearest station and display it
            const stations = await getData()
-           window.localStorage.setItem('stations', JSON.stringify(stations))
            const distances = getDistances(latLng, stations)
            const nearestStations = calculateNearestStations(distances)
          
@@ -36,8 +33,6 @@ if (container.classList.value === 'hide') {
            const { myStreetName, myStreetNumber, myCity } = parseLocation(myLocation)
 
                      const {
-                       x,
-                       y,
                        stationName,
                        stationAddress,
                        stationStreet,
@@ -57,7 +52,6 @@ if (container.classList.value === 'hide') {
            }
  
           map.map.on('load', function() {
-         // const midpoint = calculateMidpoint([latLng.lng, latLng.lat], [x, y])
           map.map.resize()
           map.getInitialDirections(originDestination)
 
@@ -78,8 +72,7 @@ if (container.classList.value === 'hide') {
                newDestination.stationStreet = id.split(' ')[0]
                newDestination.stationStreetNumber = id.split(' ')[1].replace(/,/, '')
                newDestination.stationCity = id.split(',')[1].trim()
-               const midpoint = calculateMidpoint([latLng.lng, latLng.lat], [x, y])
-               map.getDirections(newDestination, midpoint)
+               map.getDirections(newDestination)
           
                let nearestStationButton
                if (!document.getElementById('nearest-station-button')) {
