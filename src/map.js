@@ -52,7 +52,7 @@ class Map {
         stationStreet,
         stationStreetNumber,
         stationCity
-    }, latLng)  {
+    })  {
         this.geolocationTrigger()
         this.directions.setOrigin(`${myStreetName} ${myStreetNumber}, ${myCity}`)
         this.directions.setDestination(`${stationStreet}, ${stationStreetNumber}, ${stationCity}`)

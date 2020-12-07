@@ -101,7 +101,12 @@ i {
 #message {
     width: 100%;
     margin-right: 1rem;
+    margin-left: 1rem;
     justify-content: center;
+}
+
+#nearest-station {
+   margin-left: 1rem;
 }
 
 #locate-me {
@@ -147,9 +152,10 @@ animation-duration: 1s
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
+
 #map-container {
-    margin-left: 4.1rem;
-    margin-right: 4.3rem;
+    margin-left: 6rem;
+    margin-right: 6rem;
 }
 
 #mapbox {
@@ -185,6 +191,30 @@ animation-duration: 1s
     }
 } */
 
+@media screen and (max-width: 1200px) {
+    #map-container {
+        margin-left: 2.5rem;
+        margin-right: 2.5rem;
+    }
+
+    #other-stations {
+        margin-left: 4rem;
+    }
+
+    #location-display {
+        margin-right: 3rem;
+    }
+
+}
+
+@media screen and (max-width: 950px) {
+   
+    #other-stations {
+        margin-left: 1rem;
+    }
+
+}
+
 @media screen and (max-width: 600px) {
 
     h2 {
@@ -198,7 +228,31 @@ animation-duration: 1s
         display: block;
     }
 
+    #location-display {
+        margin-left: 2rem;
+    }
+
+    #main {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    #message {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+     #map-container {
+         margin-left: 2rem;
+         margin-right: 2rem;
+     }
+
+    #nearest-station {
+        display: block;
+    }
+
     #other-stations {
+        width: 100%;
         margin-left: 0;
     }
 

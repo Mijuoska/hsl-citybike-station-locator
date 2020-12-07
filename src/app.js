@@ -90,7 +90,6 @@ if (container.classList.value === 'hide') {
          });
 
      container.classList.add('hide')
-    setTimeout(function() {map.geolocationTrigger()}, 1000)
 
 //   })
  } else {
