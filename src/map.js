@@ -11,6 +11,9 @@ class Map {
         this.map = new mapboxgl.Map({
             container: 'mapbox',
             style: 'mapbox://styles/mapbox/streets-v11',
+            center: [24.945831, 60.192059],
+            zoom: 9
+
         });
 
         this.geolocate = new mapboxgl.GeolocateControl({
@@ -53,7 +56,6 @@ class Map {
         stationStreetNumber,
         stationCity
     })  {
-        this.geolocationTrigger()
         this.directions.setOrigin(`${myStreetName} ${myStreetNumber}, ${myCity}`)
         this.directions.setDestination(`${stationStreet}, ${stationStreetNumber}, ${stationCity}`)
         
