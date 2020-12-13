@@ -1,11 +1,9 @@
 import { getLocation, parseLocation, showError, displayInfo, getDistances, calculateNearestStations, parseNearestStation, createStationList } from './functions' 
 import { decodeLocation, getData } from './requests'
 import Map from './map'
- 
+
 const map = new Map()
   map.initMap()
-
-
 
 const container = document.getElementsByClassName('container')[0]
 
@@ -15,9 +13,6 @@ if (container.classList.value === 'hide') {
 
  if (navigator.geolocation) {
   
-   const locateMe = document.getElementById('locate-me')
-   // locateMe.addEventListener('click', function () {
-         // Get current location and display it
          getLocation(map.options, showError, async (latLng) => {
            let myLocation = await decodeLocation(latLng.lat, latLng.lng)
            document.getElementById('location-display').classList.remove('hide')
@@ -97,7 +92,6 @@ if (container.classList.value === 'hide') {
 
      container.classList.add('hide')
 
-//   })
  } else {
    message.innerHTML = "Geolocation is not supported by this browser."
  }

@@ -10,6 +10,8 @@
     "babel-loader": "^8.1.0",
     "babel-polyfill": "^6.26.0",
     "buffer": "^4.9.2",
+    "dotenv": "^8.2.0",
+    "dotenv-webpack": "^6.0.0",
     "emojis-list": "^3.0.0",
     "esrecurse": "^4.2.1",
     "estraverse": "^4.3.0",
