@@ -1,4 +1,3 @@
-
 const getLocation = (options, showError, callback) => {
         navigator.geolocation.getCurrentPosition((position) =>{
             const latLng = {

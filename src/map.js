@@ -45,6 +45,7 @@ class Map {
     initMap ()  {
         this.map.addControl(this.geolocate)
         this.map.addControl(this.directions)
+
     }
     getInitialDirections ({
         myStreetName,
