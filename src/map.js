@@ -47,20 +47,8 @@ class Map {
         this.map.addControl(this.directions)
 
     }
-    getInitialDirections ({
-        myStreetName,
-        myStreetNumber,
-        myCity,
-        stationStreet,
-        stationStreetNumber,
-        stationCity
-    })  {
-        this.directions.setOrigin(`${myStreetName} ${myStreetNumber}, ${myCity}`)
-        this.directions.setDestination(`${stationStreet}, ${stationStreetNumber}, ${stationCity}`)
-        
-      
-    }
-    getDirections ({ myStreetName, myStreetNumber, myCity, stationStreet, stationStreetNumber, stationCity }) {
+  
+    getDirections ({ myStreetName, myStreetNumber, myCity }, { stationStreet, stationStreetNumber, stationCity }) {
     this.directions.setOrigin(`${myStreetName} ${myStreetNumber}, ${myCity}`)
     this.directions.setDestination(`${stationStreet}, ${stationStreetNumber}, ${stationCity}`)
 
