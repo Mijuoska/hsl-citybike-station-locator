@@ -1,7 +1,7 @@
 import mapboxgl from 'mapbox-gl'
 import * as MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 
-mapboxgl.accessToken = process.env.MAPBOX_ACCESS_KEY;
+mapboxgl.accessToken = process.env.MAPBOX_ACCESS_KEY || 'pk.eyJ1IjoibWlqdW9za2EiLCJhIjoiY2tjcmM5ZzNvMWRkMjJ4czY3cWZqbXJtMiJ9.aHRoj4uOFmfGDowX3xxBDQ'
 
 class Map {
     constructor() {
