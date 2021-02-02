@@ -1,4 +1,3 @@
-
 import mapboxgl from 'mapbox-gl'
 import * as MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
 
@@ -20,7 +19,7 @@ class Map {
             },
             showUserLocation: true
         });
-       
+
         this.directions = new MapboxDirections({
             accessToken: mapboxgl.accessToken,
             unit: 'metric',
@@ -32,31 +31,39 @@ class Map {
             }
         });
 
-        this.options = {
-                enableHighAccuracy: true,
-                timeout: 10000
-            };
     }
 
     geolocationTrigger() {
-         this.geolocate.trigger()
+        this.geolocate.trigger()
     }
 
-    initMap ()  {
+    initMap() {
         this.map.addControl(this.geolocate)
         this.map.addControl(this.directions)
 
     }
-  
-    getDirections ({ myStreetName, myStreetNumber, myCity }, { stationStreet, stationStreetNumber, stationCity }) {
-    this.directions.setOrigin(`${myStreetName} ${myStreetNumber}, ${myCity}`)
-    this.directions.setDestination(`${stationStreet}, ${stationStreetNumber}, ${stationCity}`)
+
+
+    getDirections({
+        myStreetName,
+        myStreetNumber,
+        myCity
+    }, {
+        stationStreet,
+        stationStreetNumber,
+        stationCity
+    }) {
+        this.directions.setOrigin(`${myStreetName} ${myStreetNumber}, ${myCity}`)
+        this.directions.setDestination(`${stationStreet}, ${stationStreetNumber}, ${stationCity}`)
+
+    }
 
 }
 
+
+
+
+export {
+    Map as
+    default
 }
-
-
-
-
-export { Map as default }

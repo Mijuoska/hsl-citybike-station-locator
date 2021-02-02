@@ -3,15 +3,13 @@
 
 <head>
     <title>Find a City Bike Station</title>
-     <!-- Required meta tags -->
-     <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-     <!-- Styles -->
+    <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="./styles.css">
-   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-   -->
+   
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
     <script src="https://kit.fontawesome.com/c51fd8968b.js" crossorigin="anonymous"></script>
 
@@ -21,46 +19,36 @@
 
 <h1>Find a City Bike Station</h1>
 <div>
-   
- <div class="hide" id="location-display">
-              <div class="row">
-     <div class="column hide" id="message">
-         <i class="icon fas fa-map-marker-alt"></i> <b>Your current location:</b>&nbsp; <span id="current-location-text"></span>
-     </div>
-     <div class="column hide" id="nearest-station">
-    <i class="icon fas fa-bicycle"></i> <b>Your nearest station:</b>&nbsp; <span id="nearest-station-text"></span>
-     </div>
-     </div>
- </div>
- 
-<div class="row" id="main">
-<div class="column hide" id="other-stations-container">
-<div id="loader" style="display:block"></div>
-<div id="other-stations">
-<h2 id="other-stations-title">Other stations near you</h2>
-<ul id="station-list"></ul>
-</div>
-</div>
-<div class="column" id="map-container">
-    <div id="mapbox"></div>
+
+    <div class="hide" id="location-display">
+        <div class="row">
+            <div class="column hide" id="message">
+                <i class="icon fas fa-map-marker-alt"></i> <b>Your current location:</b>&nbsp; <span
+                    id="current-location-text"></span>
+            </div>
+            <div class="column hide" id="nearest-station">
+                <i class="icon fas fa-bicycle"></i> <b>Your nearest station:</b>&nbsp; <span
+                    id="nearest-station-text"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="main">
+        <div class="column hide" id="other-stations-container">
+            <div id="loader" style="display:block"></div>
+            <div id="other-stations">
+                <h2 id="other-stations-title">Other stations near you</h2>
+                <ul id="station-list"></ul>
+            </div>
+        </div>
+        <div class="column" id="map-container">
+            <div id="mapbox"></div>
 
 
-</div>
-</div>
+        </div>
+    </div>
 
-  <script>
-    // function onPageLoad() {
-    //     setTimeout(showPage, 3000);
-    // }
-
-    // function showPage() {
-    //     document.getElementById("loader").style.display = "none";
-    //     document.getElementById("other-stations").style.display = "block";
-    // }
-</script>
-
-
-<script src="scripts/bundle.js"></script>
-</body>
+    <script src="scripts/bundle.js"></script>
+    </body>
 
 </html>
