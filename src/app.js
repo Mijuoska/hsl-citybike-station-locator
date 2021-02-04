@@ -27,8 +27,17 @@ if (!navigator.geolocation) {
       document.getElementById("location-display").classList.remove("hide");
       displayInfo("message", "current-location-text", myLocation.data[0].label);
 
+
+
       const map = new Map();
+      document.getElementById('mapbox').classList.remove('hide');
+      document.querySelector('.isLoading').classList.add('hide');
+
       map.initMap();
+
+      var canvas = document.getElementsByTagName('canvas');
+      canvas[0].style.width = '100%';
+      canvas[0].style.height = '100%';
 
       // Get bike stations, display them on the screen, calculate the nearest station and display it
       const stations = await getData();
@@ -60,6 +69,9 @@ if (!navigator.geolocation) {
         stationCity: stationCity,
       };
 
+    
+
+
       map.map.on("load", () => {
         map.getDirections(origin, destination);
         map.map.resize();
@@ -69,6 +81,8 @@ if (!navigator.geolocation) {
       displayInfo("nearest-station", "nearest-station-text", stationString);
       // creating a list of the next nearest stations, excluding the one already displayed
       createStationList(nearestStations);
+
+         
 
       // Creating buttons for locating the next neareste stations
       let locateButtons = document.querySelectorAll(".locate");
@@ -83,6 +97,8 @@ if (!navigator.geolocation) {
           };
 
           map.getDirections(origin, newDestination);
+
+         
 
           // Generating button to show nearest station again, if any of the above buttons are clicked
           let nearestStationButton;
@@ -100,6 +116,9 @@ if (!navigator.geolocation) {
           }
         });
       }
+      
     }
+    
   );
+   
 }
