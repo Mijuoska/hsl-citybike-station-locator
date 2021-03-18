@@ -23,8 +23,10 @@ h2 {
 
 li {
     list-style: none;
-    padding: 6px 6px 6px 8px;
+    margin: 2.5px 0 0 2.5px;
+    padding: 8px;
     border-bottom: 1px solid #ddd;
+    border-radius:2px;
     background-color: white;  
     display: flex;
     justify-content: space-between;
@@ -182,7 +184,7 @@ animation-duration: 1s
 #map-container {
     margin-left: 6rem;
     margin-right: 9.2rem;
-    min-height: 300px;
+    min-height: 500px;
 }
 
 #mapbox {
