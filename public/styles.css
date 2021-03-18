@@ -25,7 +25,9 @@ li {
     list-style: none;
     padding: 6px 6px 6px 8px;
     border-bottom: 1px solid #ddd;
-    background-color: white;
+    background-color: white;  
+    display: flex;
+    justify-content: space-between;
 }
 
 li:hover {
@@ -49,6 +51,7 @@ i {
 .row {
    display: flex;
    flex-direction: row;
+   justify-content: space-evenly;
 }
 
 .column {
@@ -165,7 +168,8 @@ animation-duration: 1s
 } 
 
 #other-stations {
-    margin-left: 2.5rem;
+    margin-left: 6.5rem;
+    width: 100%;
 }
 
 #station-list  {
@@ -177,7 +181,7 @@ animation-duration: 1s
 
 #map-container {
     margin-left: 6rem;
-    margin-right: 6rem;
+    margin-right: 9.2rem;
     min-height: 300px;
 }
 
@@ -197,7 +201,7 @@ animation-duration: 1s
     }
 
     #other-stations {
-        margin-left: 4rem;
+        margin-left: 5rem;
     }
 
     #location-display {
