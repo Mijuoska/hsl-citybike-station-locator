@@ -1,5 +1,5 @@
 const getLocation = (options, showError, callback) => {
-        navigator.geolocation.getCurrentPosition((position) =>{
+        navigator.geolocation.getCurrentPosition((position) => {
             const latLng = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude

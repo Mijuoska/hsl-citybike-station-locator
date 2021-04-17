@@ -16,18 +16,21 @@ import Map from "./map";
 if (!navigator.geolocation) {
   alert("Geolocation not available!");
 } else {
-  getLocation(
-    {
+  getLocation({
       enableHighAccuracy: true,
       timeout: 10000,
     },
     showError,
     async (latLng) => {
-      let myLocation = await decodeLocation(latLng.lat, latLng.lng);
+      let myLocation 
+      try {
+      myLocation = await decodeLocation(latLng.lat, latLng.lng);
+      } catch(e) {
+        displayInfo("message", "current-location-text", "Something went wrong with fetching location")
+        console.log(e)
+      }
       document.getElementById("location-display").classList.remove("hide");
       displayInfo("message", "current-location-text", myLocation.data[0].label);
-
-
 
       const map = new Map();
       document.getElementById('mapbox').classList.remove('hide');
@@ -40,7 +43,14 @@ if (!navigator.geolocation) {
       canvas[0].style.height = '100%';
 
       // Get bike stations, display them on the screen, calculate the nearest station and display it
-      const stations = await getData();
+      let stations
+      try {
+       stations = await getData();
+      } catch (e) {
+          displayInfo("message", "current-location-text", "Something went wrong with fetching stations")
+          console.log(e);
+          
+      }
       const distances = getDistances(latLng, stations);
       const nearestStations = calculateNearestStations(distances);
 
@@ -82,7 +92,6 @@ if (!navigator.geolocation) {
       // creating a list of the next nearest stations, excluding the one already displayed
       createStationList(nearestStations);
 
-         
 
       // Creating buttons for locating the next neareste stations
       let locateButtons = document.querySelectorAll(".locate");
