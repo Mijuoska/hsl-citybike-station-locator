@@ -14,12 +14,12 @@ const decodeLocation = async (lat, lng) => {
 
 
 const getData = async () => {
-    const url = 'https://services1.arcgis.com/sswNXkUiRoWtrx0t/arcgis/rest/services/Helsingin_ja_Espoon_kaupunkipy%C3%B6r%C3%A4asemat/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json'
+    const url = 'https://services1.arcgis.com/sswNXkUiRoWtrx0t/arcgis/rest/services/Helsingin_ja_Espoon_kaupunkipy%C3%B6r%C3%A4asemat_avoin/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json'
 
     const response = await fetch(url)
-
     if (response.status === 200) {
         const data = await response.json()
+        console.log(data)
         return data.features
     } else {
         throw new Error("Unable to get station info")

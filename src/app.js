@@ -46,6 +46,7 @@ if (!navigator.geolocation) {
       let stations
       try {
        stations = await getData();
+       console.log(stations)
       } catch (e) {
           displayInfo("message", "current-location-text", "Something went wrong with fetching stations")
           console.log(e);
