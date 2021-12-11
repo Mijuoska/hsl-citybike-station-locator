@@ -27,7 +27,6 @@ if (!navigator.geolocation) {
       myLocation = await decodeLocation(latLng.lat, latLng.lng);
       } catch(e) {
         displayInfo("message", "current-location-text", "Something went wrong with fetching location")
-        console.log(e)
       }
       document.getElementById("location-display").classList.remove("hide");
       displayInfo("message", "current-location-text", myLocation.data[0].label);
@@ -46,11 +45,8 @@ if (!navigator.geolocation) {
       let stations
       try {
        stations = await getData();
-       console.log(stations)
       } catch (e) {
-          displayInfo("message", "current-location-text", "Something went wrong with fetching stations")
-          console.log(e);
-          
+          displayInfo("message", "current-location-text", "Something went wrong with fetching stations")          
       }
       const distances = getDistances(latLng, stations);
       const nearestStations = calculateNearestStations(distances);
