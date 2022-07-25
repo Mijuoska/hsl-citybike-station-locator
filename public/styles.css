@@ -14,8 +14,8 @@ h1 {
 h2 {
     background-color: #2E9CCA;
     color: white;
-    width: 100%;
-    padding: 8px;
+    width: 95%;
+    padding: 0.7rem;
     border: 1px solid #2E9CCA;
     border-radius: 2px;
     margin-top: 0;
@@ -24,7 +24,8 @@ h2 {
 li {
     list-style: none;
     margin: 2.5px 0 0 2.5px;
-    padding: 8px;
+    padding: 0.7rem;
+    width: 95%;
     border-bottom: 1px solid #ddd;
     border-radius:2px;
     background-color: white;  
