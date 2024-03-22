@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.4",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^5.0.4"
   },
   "scripts": {
     "dev-server": "webpack-dev-server --mode development",
